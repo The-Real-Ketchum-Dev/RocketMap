@@ -2044,6 +2044,7 @@ def parse_map(args, map_dict, step_location, db_update_queue, wh_update_queue,
                 'height': None,
                 'weight': None,
                 'gender': p.pokemon_data.pokemon_display.gender,
+                'costume': None,
                 'form': None
             }
 
@@ -2051,6 +2052,11 @@ def parse_map(args, map_dict, step_location, db_update_queue, wh_update_queue,
             if pokemon_id == 201:
                 pokemon[p.encounter_id]['form'] = (p.pokemon_data
                                                     .pokemon_display.form)
+
+            # Check for Pika family costumes.
+            if ( pokemon_id == 25 ) or ( pokemon_id == 26 ) or ( pokemon_id == 172 ):
+                pokemon[p.encounter_id]['costume'] = (p.pokemon_data
+                                                       .pokemon_display.costume)
 
             # We need to check if exist and is not false due to a request error
             if pokemon_info:
