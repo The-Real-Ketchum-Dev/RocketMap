@@ -2050,13 +2050,11 @@ def parse_map(args, map_dict, step_location, db_update_queue, wh_update_queue,
 
             # Check for Unown's alphabetic character.
             if pokemon_id == 201:
-                pokemon[p.encounter_id]['form'] = (p.pokemon_data
-                                                    .pokemon_display.form)
+                pokemon[p.encounter_id]['form'] = (p.pokemon_data.pokemon_display.form)
 
             # Check for Pika family costumes.
             if ( pokemon_id == 25 ) or ( pokemon_id == 26 ) or ( pokemon_id == 172 ):
-                pokemon[p.encounter_id]['costume'] = (p.pokemon_data
-                                                       .pokemon_display.costume)
+                pokemon[p.encounter_id]['costume'] = (p.pokemon_data.pokemon_display.costume)
 
             # We need to check if exist and is not false due to a request error
             if pokemon_info:
@@ -3073,6 +3071,11 @@ def database_migrate(db, old_ver):
                                     null=False, default=datetime.utcnow())),
             migrator.add_column('gym', 'total_cp',
                                 SmallIntegerField(null=False, default=0)))
+    if old_ver < 21:
+        migrate(
+            migrator.add_column('pokemon', 'costume',
+                                SmallIntegerField(null=True, default=0))
+            )
 
     # Always log that we're done.
     log.info('Schema upgrade complete.')
