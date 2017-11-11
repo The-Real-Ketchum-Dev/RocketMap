@@ -3072,7 +3072,7 @@ def database_migrate(db, old_ver):
     if old_ver < 21:
         migrate(
             migrator.add_column('pokemon', 'costume',
-                                SmallIntegerField(null=True, default=0))
+                                SmallIntegerField(null=True))
             )
 
     # Always log that we're done.
