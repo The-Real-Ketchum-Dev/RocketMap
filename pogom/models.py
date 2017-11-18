@@ -2551,8 +2551,8 @@ def parse_gyms(args, gym_responses, wh_update_queue, db_update_queue):
                 'iv_defense': pokemon.individual_defense,
                 'iv_stamina': pokemon.individual_stamina,
                 'iv_attack': pokemon.individual_attack,
-                'costume' : pokemon.pokemon_display.costume,
-                'form' : pokemon.pokemon_display.form,
+                'costume': pokemon.pokemon_display.costume,
+                'form': pokemon.pokemon_display.form,
                 'last_seen': datetime.utcnow(),
             }
 
