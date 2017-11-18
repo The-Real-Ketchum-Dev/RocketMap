@@ -520,6 +520,8 @@ class Gym(LatLongModel):
                            GymMember.deployment_time,
                            GymMember.last_scanned,
                            GymPokemon.pokemon_id,
+                           GymPokemon.costume,
+                           GymPokemon.form,
                            Trainer.name.alias('trainer_name'),
                            Trainer.level.alias('trainer_level'))
                        .join(Gym, on=(GymMember.gym_id == Gym.gym_id))
@@ -602,6 +604,8 @@ class Gym(LatLongModel):
                            GymPokemon.iv_attack,
                            GymPokemon.iv_defense,
                            GymPokemon.iv_stamina,
+                           GymPokemon.costume,
+                           GymPokemon.form,
                            Trainer.name.alias('trainer_name'),
                            Trainer.level.alias('trainer_level'))
                    .join(Gym, on=(GymMember.gym_id == Gym.gym_id))
@@ -2561,6 +2565,8 @@ def parse_gyms(args, gym_responses, wh_update_queue, db_update_queue):
                 'iv_defense': pokemon.individual_defense,
                 'iv_stamina': pokemon.individual_stamina,
                 'iv_attack': pokemon.individual_attack,
+                'costume' : pokemon.pokemon_display.costume,
+                'form' : pokemon.pokemon_display.form,
                 'last_seen': datetime.utcnow(),
             }
 
@@ -3086,6 +3092,10 @@ def database_migrate(db, old_ver):
     if old_ver < 21:
         migrate(
             migrator.add_column('pokemon', 'costume',
+                                SmallIntegerField(null=True)),
+            migrator.add_column('gympokemon', 'costume',
+                                SmallIntegerField(null=True)),
+            migrator.add_column('gympokemon', 'form',
                                 SmallIntegerField(null=True))
             )
 
