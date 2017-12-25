@@ -2050,9 +2050,13 @@ def parse_map(args, map_dict, scan_coords, scan_location, db_update_queue,
                 'weight': None,
                 'gender': p.pokemon_data.pokemon_display.gender,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 'costume': p.pokemon_data.pokemon_display.costume,
 >>>>>>> d75633d... Switching `costume` to be gathered on all pokemon
+=======
+                'costume': p.pokemon_data.pokemon_display.costume,
+>>>>>>> 352f3a23c22e6d47d4131207977fdc8d9c5fe937
                 'form': None
             }
 
