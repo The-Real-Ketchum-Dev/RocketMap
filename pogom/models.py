@@ -3236,18 +3236,16 @@ def database_migrate(db, old_ver):
         )
 
     if old_ver < 25:
-        # Add `costume` column to `pokemon`
-        db.execute_sql('ALTER TABLE `pokemon` '
-                       'ADD `costume` SMALLINT(6) '
-                       'DEFAULT NULL AFTER `form`')
-        # Add `form` column to `gympokemon`
-        db.execute_sql('ALTER TABLE `gympokemon` '
-                       'ADD `form` SMALLINT(6) '
-                       'DEFAULT NULL AFTER `iv_attack`')
-        # Add `costume` column to `gympokemon`
-        db.execute_sql('ALTER TABLE `gympokemon` '
-                       'ADD `costume` SMALLINT(6) '
-                       'DEFAULT NULL AFTER `costume`')
+        migrate(
+            # Add `costume` column to `pokemon`
+            migrator.add_column('pokemon', 'costume',
+                                SmallIntegerField(null=True)),
+            # Add `form` column to `gympokemon`
+            migrator.add_column('gympokemon', 'form',
+                                SmallIntegerField(null=True)),
+            # Add `costume` column to `gympokemon`
+            migrator.add_column('gympokemon', 'costume',
+                                SmallIntegerField(null=True)))
 
     # Always log that we're done.
     log.info('Schema upgrade complete.')
