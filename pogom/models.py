@@ -2012,13 +2012,8 @@ def parse_map(args, map_dict, scan_coords, scan_location, db_update_queue,
                 'weight': None,
                 'gender': p.pokemon_data.pokemon_display.gender,
                 'costume': p.pokemon_data.pokemon_display.costume,
-                'form': None
+                'form': p.pokemon_data.pokemon_display.form
             }
-
-            # Check for Unown's alphabetic character.
-            if pokemon_id == 201:
-                pokemon[p.encounter_id]['form'] = (p.pokemon_data
-                                                    .pokemon_display.form)
 
             # We need to check if exist and is not false due to a request error
             if pokemon_info:
@@ -2524,8 +2519,8 @@ def parse_gyms(args, gym_responses, wh_update_queue, db_update_queue):
                 'iv_defense': pokemon.individual_defense,
                 'iv_stamina': pokemon.individual_stamina,
                 'iv_attack': pokemon.individual_attack,
-                'costume': pokemon.costume,
-                'form': pokemon.form,
+                'costume': pokemon.pokemon_data.pokemon_display.costume,
+                'form': pokemon.pokemon_data.pokemon_display.form,
                 'last_seen': datetime.utcnow(),
             }
 
